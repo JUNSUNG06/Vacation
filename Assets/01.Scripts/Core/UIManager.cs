@@ -8,19 +8,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance = null;
+    private Image fadeImage = null;
 
     private void Awake() 
     {
         if(Instance == null) { Instance = this; }    
-    } 
 
-    public void FadeIn(Image image, float time) 
-    {
-        image.DOFade(1, time);
+        fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
     }
 
-    public void FadeOut(Image image, float time)
+    private void Start() 
     {
-        image.DOFade(0, time);
+        fadeImage.DOFade(0, 2);
     }
 }

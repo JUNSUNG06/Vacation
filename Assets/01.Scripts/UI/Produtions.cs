@@ -8,20 +8,9 @@ public class Produtions : MonoBehaviour
 {
     [SerializeField] private float fadeTime = 1f;
 
-    GameObject canvas = null;
-    GameObject startPanel = null;
-    GameObject selectPanel = null;
-
     private Vector3 imagePos;
 
     private bool isSlide = false;
-
-    private void Awake() 
-    {
-        canvas = GameObject.Find("Canvas").gameObject;
-        startPanel = canvas.transform.Find("StartPanel").gameObject;
-        selectPanel = canvas.transform.Find("SelectPanel").gameObject;    
-    }
 
     public void FadeIn(Image image) 
     {
@@ -61,18 +50,5 @@ public class Produtions : MonoBehaviour
         if(isSlide) return;
         isSlide = true;
         image.DOLocalMoveY(image.localPosition.y - image.rect.height, 1).SetEase(Ease.Linear).OnComplete(() => isSlide = false);
-    }
-
-    public void GameStart(RectTransform fadeImage)
-    {
-        Sequence seq = DOTween.Sequence();
-
-        seq.Append(fadeImage.DOLocalMoveY(0, 1).SetEase(Ease.Linear).OnComplete( () =>
-        {
-            startPanel.SetActive(false);
-            selectPanel.SetActive(true);
-        })
-        );
-        seq.Insert(2.5f, fadeImage.DOLocalMoveY(fadeImage.localPosition.y + fadeImage.rect.height, 1).SetEase(Ease.Linear));
     }
 }
