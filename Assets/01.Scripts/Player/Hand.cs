@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    [SerializeField] private float maxDistacne = 5f;
     public bool isRight = false;
 
     Transform playerTrm = null;
@@ -22,7 +23,8 @@ public class Hand : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 dir = mousePos - transform.position;
-
+        Vector3 pos;
+        
         if(mousePos.x < playerTrm.transform.position.x) { isRight = true; }
         else if(mousePos.x > playerTrm.transform.position.x) { isRight = false; }
 
@@ -30,5 +32,8 @@ public class Hand : MonoBehaviour
         if(isRight) { angle = Mathf.Atan2(dir.y, -dir.x) * Mathf.Rad2Deg; }
 
         transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        pos = mousePos;
+        transform.position = pos;
     }
 }
