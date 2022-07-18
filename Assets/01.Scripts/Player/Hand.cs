@@ -32,8 +32,5 @@ public class Hand : MonoBehaviour
         if(isRight) { angle = Mathf.Atan2(dir.y, -dir.x) * Mathf.Rad2Deg; }
 
         transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        pos = mousePos;
-        transform.position = pos;
     }
 }
